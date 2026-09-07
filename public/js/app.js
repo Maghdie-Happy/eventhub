@@ -99,7 +99,22 @@ function renderGrid(events, containerId) {
 
     container.innerHTML = events.map(event => `
         <div class="event-card">
-        <div></div>
+        <div class="image-placeholder"><span>${event.title}</span></div>
+        <div class="card-content">
+        <span class="badge">${event.catagory}</span>
+        <h4>${event.title}</h4>
+        <p class="event-date">🗓️ ${event.date ? event.date.split('T')[0] : ''} at ${event.time}</p>
+        <p class="event-loc">📍 ${event.loc} (${event.scope})</p>
+        <p style="font-weight: bold; marfin-top: 0.25rem;">
+        ${event.price > 0 ? `R${event.price}` : 'FREE'}
+        </p>
+        <!-- Connects card to details view using Query Parameter ID -->
+        <a class="action-btn" style="margin-top:0.5rem;" href="details.html?id=${event.id}">
+        View Details
+        </a>
+        </div>
         </div>
         `).join('');
 }
+
+//Read event ID from query parameters and render dynamic details
