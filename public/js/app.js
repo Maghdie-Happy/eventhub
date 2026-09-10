@@ -55,13 +55,14 @@ function toggleMobileMenu() {
 //Fetch featured events for display on index.html
 async function fetchFeaturedEvents() {
     try {
-        const response = await fetch('/api/events?featured=true');
+        const response = await fetch('/api/events');
         const result = await response.json();
+
         if (result.success) {
             renderGrid(result.data, 'trending-grid');
         }
     } catch (err) {
-        console.error('Error loading featured events', err);
+        console.error('Error loading events', err);
     }
 }
 
@@ -108,7 +109,7 @@ function renderGrid(events, containerId) {
         <div class="event-card">
         <div class="image-placeholder"><span>${event.title}</span></div>
         <div class="card-content">
-        <span class="badge">${event.catagory}</span>
+        <span class="badge">${event.category}</span>
         <h4>${event.title}</h4>
         <p class="event-date">🗓️ ${event.date ? event.date.split('T')[0] : ''} at ${event.time}</p>
         <p class="event-loc">📍 ${event.loc} (${event.scope})</p>
@@ -125,43 +126,232 @@ function renderGrid(events, containerId) {
 }
 
 //Read event ID from query parameters and render dynamic details
+
 async function loadEventDetailsPage() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const eventId = urlParams.get('id');
     const container = document.getElementById('event-details-container');
 
+    if (!container) return;
+
+    // Get the event ID from the URL
+    const params = new URLSearchParams(window.location.search);
+    const eventId = params.get('id');
+
     if (!eventId) {
-        container.innerHTML = `<p>Invalid Event ID requested.</p>`;
+        container.innerHTML = `
+<div class="form-card">
+    <h2>Event Not Found</h2>
+<p style="color: var(--text-secondary); margin-top: 0.5rem;">
+    No event was selected.
+</p>
+
+<a href="index.html"
+   class="action-btn"
+   style="margin-top: 1.5rem;">
+    Back to Home
+</a>
+</div>
+`;
+
         return;
     }
 
     try {
-        const response = await fetch('/api/events?id=${eventId}');
+        // Get the selected event from the backend
+        const response = await fetch(`/api/events?id=${eventId}`);
+
+        if (!response.ok) {
+            throw new Error('Failed to load event');
+        }
+
         const result = await response.json();
 
-        if (result.success && result.data.length > 0) {
-            const event = result.data[0];
+        if (!result.success || result.data.length === 0) {
             container.innerHTML = `
-            <div class="form-card" style="max-width: 800px; margin-top: 1rem;">
-            <span class="badge">${event.catagory}</span>
-            <h1 style="margin-top: 0.5rem;">${event.title}</h1>
-            <p style="color: var(--text-secondary);">Hosted by ${event.organizer}</p>
-            <hr style="border-color: var(--border-color); margin: 1rem 0;">
-            <p><strong>Date & Time:</strong> ${event.date.split('T')[0]} at ${event.time}</p>
-            <p><strong>Location:</strong> ${event.loc}, ${event.scope}</p>
-            <p><strong>Price:</strong> ${event.price > 0 ? `R${event.price}` : 'Free Entry'}</p>
-            <h3 style="margin-top: 1.5rem;">About this event</h3>
-            <p style=color:"var(--text-secondary); margin-top: 0.5rem;">${event.description}</p>
-            <button class="action-btn" style="margin-top: 1.5rem; width: 100%; font-size: 1.1rem;" onclick=alert"('Ticket successfully reserved!')">
-            Book Ticket Now
-            </button>
-            </div>
-            `;
+    <div class="form-card">
+    <h2>Event Not Found</h2>
+
+<p style="color: var(--text-secondary); margin-top: 0.5rem;">
+    The event you're looking for could not be found.
+</p>
+
+<a href="index.html"
+   class="action-btn"
+   style="margin-top: 1.5rem;">
+    Back to Home
+</a>
+</div>
+`;
+
+            return;
         }
-    } catch (err) {
-        container.innerHTML = `<p>Error loading event details!</p>`;
+
+        const event = result.data[0];
+
+        container.innerHTML = `
+<div class="form-card" style="max-width: 850px;">
+
+    <span class="badge">
+    ${event.category || 'Event'}
+</span>
+
+<h1 style="margin-top: 1rem;">
+    ${event.title}
+</h1>
+
+<p style="
+                    color: var(--text-secondary);
+                    margin-top: 1rem;
+                    line-height: 1.7;
+                ">
+    ${event.description || 'No description available.'}
+</p>
+
+<div style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                ">
+
+    <div class="dash-card">
+        <p style="color: var(--text-secondary);">
+            📅 Date
+        </p>
+
+        <p style="margin-top: 0.4rem; font-weight: 600;">
+            ${event.date}
+        </p>
+    </div>
+
+    <div class="dash-card">
+        <p style="color: var(--text-secondary);">
+            🕐 Time
+        </p>
+
+        <p style="margin-top: 0.4rem; font-weight: 600;">
+            ${event.time}
+        </p>
+    </div>
+
+    <div class="dash-card">
+        <p style="color: var(--text-secondary);">
+            📍 Location
+        </p>
+
+        <p style="margin-top: 0.4rem; font-weight: 600;">
+            ${event.loc}
+        </p>
+    </div>
+
+    <div class="dash-card">
+        <p style="color: var(--text-secondary);">
+            🌍 Province
+        </p>
+
+        <p style="margin-top: 0.4rem; font-weight: 600;">
+            ${event.scope}
+        </p>
+    </div>
+
+    <div class="dash-card">
+        <p style="color: var(--text-secondary);">
+            👤 Organizer
+        </p>
+
+        <p style="margin-top: 0.4rem; font-weight: 600;">
+            ${event.organizer}
+        </p>
+    </div>
+
+    <div class="dash-card">
+        <p style="color: var(--text-secondary);">
+            🎟️ Ticket Price
+        </p>
+
+        <p style="
+                            margin-top: 0.4rem;
+                            font-weight: 700;
+                            font-size: 1.2rem;
+                        ">
+            R${Number(event.price || 0).toFixed(2)}
+        </p>
+    </div>
+
+</div>
+
+<div style="
+                    display: flex;
+                    gap: 1rem;
+                    margin-top: 2rem;
+                    flex-wrap: wrap;
+                ">
+
+    <button
+        class="action-btn"
+        onclick="buyTicket(${event.id})">
+        🎟️ Buy Ticket
+    </button>
+
+    <button
+        class="theme-toggle-btn"
+        onclick="saveEvent(${event.id})">
+        ❤️ Save Event
+    </button>
+
+    <a
+        href="index.html"
+        class="theme-toggle-btn"
+        style="text-decoration: none;">
+        ← Back
+    </a>
+
+</div>
+
+</div>
+`;
+
+    } catch (error) {
+
+        console.error('Error loading event details:', error);
+
+        container.innerHTML = `
+<div class="form-card">
+
+    <h2>Something went wrong</h2>
+
+<p style="
+                    color: var(--text-secondary);
+                    margin-top: 0.5rem;
+                ">
+    We couldn't load the event details.
+    Please try again.
+</p>
+
+<a
+    href="index.html"
+    class="action-btn"
+    style="margin-top: 1.5rem;">
+    Back to Home
+</a>
+
+</div>
+`;
     }
 }
+
+
+// Buy Ticket button
+function buyTicket(eventId) {
+    alert(`Ticket purchase for event #${eventId} will be available soon.`);
+}
+
+
+// Save Event button
+function saveEvent(eventId) {
+    alert(`Event #${eventId} has been selected to save.`);
+}
+
+
 
 //Dynamically attatch dynamic query filtering to checkbox changes
 function setupFilterListeners() {
@@ -203,7 +393,7 @@ async function handlePostEvent(e) {
 
     try {
         const res = await fetch('/api/events', {
-            mathod: 'POST',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
