@@ -1,3 +1,10 @@
+/*Maghdie Petersen 
+230600204
+Class 3.I 
+Group MM3
+Last Date and Time worked on: Thursday 10 September 2026 10:19
+*/
+
 //Load environment variables from .env file
 require('dotenv').config();
 
@@ -84,10 +91,13 @@ app.get('/api/events', async (req, res) => {
 });
 
 //POST Route: Save a new event into MySQL using transactional queries
+//POST Route: Save a new event into MySQL using transactional queries
 app.post('/api/events', async (req, res) => {
-    const connection = await dbPool.getConnection;
+    const connection = await dbPool.getConnection();
+
     try {
         await connection.beginTransaction();
+
         const { title, category, description, price, area, province, date, time } = req.body;
 
         //Insert new location entry
@@ -109,11 +119,22 @@ app.post('/api/events', async (req, res) => {
         );
 
         await connection.commit();
-        res.status(201).json({ success: true, message: 'Event created Successfully!' });
+
+        res.status(201).json({
+            success: true,
+            message: 'Event created Successfully!'
+        });
+
     } catch (error) {
         await connection.rollback();
+
         console.error('Event Creation Error:', error);
-        res.status(500).json({ success: false, message: 'Failed to save event.' });
+
+        res.status(500).json({
+            success: false,
+            message: 'Failed to save event.'
+        });
+
     } finally {
         connection.release();
     }

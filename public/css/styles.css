@@ -1,3 +1,10 @@
+/*Maghdie Petersen 
+230600204
+Class 3.I 
+Group MM3
+Last Date and Time worked on: Thursday 10 September 2026 10:23
+*/
+
 /*Variables for switching between Light and Dark Mode*/
 :root {
     --bg-primary: #080f1e;
@@ -26,7 +33,7 @@ body.light-mode {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont,sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -56,7 +63,8 @@ body {
     text-decoration: none;
 }
 
-.nav-links, .nav-actions {
+.nav-links,
+.nav-actions {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -71,7 +79,8 @@ body {
     border-radius: 8px;
 }
 
-.nav-link.active, .nav-link:hover {
+.nav-link.active,
+.nav-link:hover {
     color: var(--text-primary);
     background-color: var(--border-color);
 }
@@ -115,9 +124,20 @@ body {
     margin: 0 auto;
 }
 
-.hero-section {text-align: center; padding: 3rem 1rem;}
-.hero-section h1{font-size: 2.5rem; margin-bottom: 0.5rem;}
-.hero-section p{color: var(--text-secondary); margin-bottom: 2rem;}
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-section p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
 
 .search-container {
     display: flex;
@@ -205,11 +225,13 @@ body {
     margin: 0 auto;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px; 
-    padding: 2rem;   
+    border-radius: 12px;
+    padding: 2rem;
 }
 
-.auth-card { max-width: 450px;}
+.auth-card {
+    max-width: 450px;
+}
 
 .form-group {
     display: flex;
@@ -218,9 +240,14 @@ body {
     margin-bottom: 1.25rem;
 }
 
-.form-group label { font-size: 0.9rem; color: var(--text-secondary);}
+.form-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
 
-.form-group input, .form-group select, .form-group textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     padding: 0.75rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
@@ -234,47 +261,95 @@ body {
     gap: 1rem;
 }
 
-.auth-switch { text-align: center; margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);}
-.auth-switch a { color: var(--accent-teal); text-decoration: none;}
+.auth-switch {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.auth-switch a {
+    color: var(--accent-teal);
+    text-decoration: none;
+}
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem; 
+    gap: 1.5rem;
 }
 
 .dash-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 12px; 
-    padding: 1.5rem;   
+    border-radius: 12px;
+    padding: 1.5rem;
 }
 
-.dash-num { font-size: 1.75rem; font-weight: 700; margin-top: 0.5rem;}
+.dash-num {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
 
-.mobile-only { display: none;}
-.mobile-toggle { background: none; border: none; font-size: 1.5rem; color: var(--text-primary); cursor: pointer;}
+.mobile-only {
+    display: none;
+}
+
+.mobile-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+}
 
 /*Responsive styling rules for screens smaller than 900px and 680px*/
 @media (max-width: 900px) {
-    .explore-layout { grid-template-columns: 1fr;}
-    .form-row { grid-template-columns: 1fr;}
+    .explore-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 680px) {
-    .desktop-only { display: none !important;}
-    .mobile-only { display: block;}
-    .navbar { padding: 1rem;}
-    .main-container { padding: 1.5rem 1rem;}
-    .hero-section h1 { font-size: 1.8rem;}
-    .search-container { flex-direction: column;}
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block;
+    }
+
+    .navbar {
+        padding: 1rem;
+    }
+
+    .main-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .hero-section h1 {
+        font-size: 1.8rem;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
     .mobile-drawer {
         display: none;
         flex-direction: column;
         gap: 0.75rem;
         background: var(--bg-secondary);
         border-bottom: 1px solid var(--border-color);
-        padding: 1rem       
+        padding: 1rem
     }
-    .mobile-drawer.open { display: flex;}
+
+    .mobile-drawer.open {
+        display: flex;
+    }
 }

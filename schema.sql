@@ -1,3 +1,10 @@
+/*Maghdie Petersen 
+230600204
+Class 3.I 
+Group MM3
+Last Date and Time worked on: Thursday 10 September 2026 10:17
+*/
+
 /*Intialize main database instance*/
 CREATE DATABASE IF NOT EXISTS eventhub_db;
 USE eventhub_db;
