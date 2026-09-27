@@ -353,3 +353,188 @@ body {
         display: flex;
     }
 }
+
+/* Mock checkout overlay */
+.checkout-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 9999;
+}
+
+
+/* Checkout card */
+.checkout-card {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Close button */
+.checkout-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+
+/* Demo payment notice */
+.checkout-demo {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+
+/* Event summary */
+.checkout-event {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+}
+
+
+/* Payment heading */
+.payment-heading {
+    margin-top: 1.5rem;
+}
+
+
+/* Payment methods */
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+
+.payment-methods label {
+    cursor: pointer;
+}
+
+
+/* Checkout labels */
+.checkout-card label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+
+/* Checkout inputs */
+.checkout-card input,
+.checkout-card select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--input-bg, transparent);
+    color: var(--text-primary);
+    box-sizing: border-box;
+}
+
+
+/* Expiry and CVV row */
+.checkout-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+
+/* Pay button */
+.checkout-pay-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+
+/* PayFast information */
+.payfast-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+
+/* Successful payment */
+.success-card {
+    text-align: center;
+}
+
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    background: var(--border-color);
+}
+
+
+.ticket-reference {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+
+.ticket-reference span {
+    color: var(--text-secondary);
+}
+
+
+.ticket-reference strong {
+    font-size: 1.4rem;
+}
+
+
+.payment-method-result {
+    margin-bottom: 1rem;
+}
+
+
+/* Mobile checkout */
+@media (max-width: 680px) {
+
+    .checkout-card {
+        padding: 1.5rem;
+    }
+
+    .checkout-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+}
