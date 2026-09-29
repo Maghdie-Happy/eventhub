@@ -3,6 +3,11 @@
 Class 3.I
 Group MM3
 Last Date and Time worked on: Thursday 10 September 2026 10:10
+Sinethemba Nyimbinya
+220085870
+Added  Function escapeHTML() , function fetchAdminEvents(),function renderAdminStats(events)
+
+
 */
 
 //LocalStorage identifier constant for keeping theme preferences saved across refreshes
@@ -82,6 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.getElementById('event-details-container')) {
         loadEventDetailsPage();
+    }
+
+    //Admin dashboard page
+    if (document.getElementById('admin-events-body')) {
+        fetchAdminEvents();
     }
 });
 
@@ -1321,4 +1331,179 @@ async function handleSignUp(e) {
 
     window.location.href =
         'login.html';
+}
+
+
+//Escape text before inserting it into HTML (prevents broken markup / XSS)
+function escapeHTML(value) {
+    return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+
+//Store every event loaded on the dashboard so filters can reuse it
+let adminEventsCache = [];
+
+
+//Load all events for the Admin Dashboard
+async function fetchAdminEvents() {
+
+    const tableBody = document.getElementById('admin-events-body');
+    const resultsMeta = document.getElementById('admin-results-meta');
+
+    if (!tableBody) return;
+
+    try {
+
+        const response = await fetch('/api/events');
+
+        if (!response.ok) {
+            throw new Error('Failed to load events');
+        }
+
+        const result = await response.json();
+
+        if (!result.success) {
+            throw new Error('Failed to load events');
+        }
+
+        adminEventsCache = result.data;
+
+        renderAdminStats(adminEventsCache);
+        setupAdminFilters();
+        applyAdminFilters();
+
+    } catch (error) {
+
+        console.error('Error loading admin events:', error);
+
+        if (resultsMeta) {
+            resultsMeta.textContent = 'Unable to load events.';
+        }
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="9" style="text-align: center; padding: 1.5rem;">
+                    Failed to load events. Make sure the server is running.
+                </td>
+            </tr>
+        `;
+    }
+}
+
+
+//Fill the summary cards at the top of the dashboard
+function renderAdminStats(events) {
+
+    const setText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+    };
+
+    const total = events.length;
+    const featured = events.filter(e => Number(e.featured) === 1).length;
+    const free = events.filter(e => Number(e.price || 0) === 0).length;
+    const paid = events.filter(e => Number(e.price || 0) > 0);
+
+    const avgPrice = paid.length > 0
+        ? paid.reduce((sum, e) => sum + Number(e.price), 0) / paid.length
+        : 0;
+
+    setText('stat-total', total);
+    setText('stat-featured', featured);
+    setText('stat-free', free);
+    setText('stat-avg-price', `R${avgPrice.toFixed(2)}`);
+}
+
+
+//Attach search and category filter listeners (only once)
+function setupAdminFilters() {
+
+    const search = document.getElementById('admin-search');
+    const category = document.getElementById('admin-category');
+
+    if (search && !search.dataset.bound) {
+        search.addEventListener('input', applyAdminFilters);
+        search.dataset.bound = 'true';
+    }
+
+    if (category && !category.dataset.bound) {
+        category.addEventListener('change', applyAdminFilters);
+        category.dataset.bound = 'true';
+    }
+}
+
+
+//Filter the cached events by search text and category, then redraw the table
+function applyAdminFilters() {
+
+    const searchEl = document.getElementById('admin-search');
+    const categoryEl = document.getElementById('admin-category');
+
+    const term = searchEl ? searchEl.value.trim().toLowerCase() : '';
+    const cat = categoryEl ? categoryEl.value : '';
+
+    const filtered = adminEventsCache.filter(event => {
+
+        const matchesCat = !cat || event.category === cat;
+
+        const matchesTerm = !term || [
+            event.title,
+            event.organizer,
+            event.loc,
+            event.scope
+        ].some(field => String(field || '').toLowerCase().includes(term));
+
+        return matchesCat && matchesTerm;
+    });
+
+    renderAdminTable(filtered);
+}
+
+
+//Draw the table rows for the dashboard
+function renderAdminTable(events) {
+
+    const tableBody = document.getElementById('admin-events-body');
+    const resultsMeta = document.getElementById('admin-results-meta');
+
+    if (!tableBody) return;
+
+    if (resultsMeta) {
+        resultsMeta.textContent =
+            `${events.length} of ${adminEventsCache.length} event(s) shown`;
+    }
+
+    if (events.length === 0) {
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="9" style="text-align: center; padding: 1.5rem;">
+                    No events available.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    tableBody.innerHTML = events.map(event => `
+        <tr>
+            <td><strong>${escapeHTML(event.title || 'No title')}</strong></td>
+            <td><span class="badge">${escapeHTML(event.category || 'N/A')}</span></td>
+            <td>${escapeHTML(event.organizer || 'EventHub')}</td>
+            <td>${escapeHTML(event.loc || 'N/A')}</td>
+            <td>${escapeHTML(event.scope || 'N/A')}</td>
+            <td>${event.date ? escapeHTML(String(event.date).split('T')[0]) : 'N/A'}</td>
+            <td>${escapeHTML(event.time || 'N/A')}</td>
+            <td>${Number(event.price || 0) > 0
+        ? `R${Number(event.price).toFixed(2)}`
+        : 'FREE'}</td>
+            <td>${Number(event.featured) === 1 ? 'Yes' : 'No'}</td>
+        </tr>
+    `).join('');
 }
