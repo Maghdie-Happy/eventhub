@@ -6,100 +6,261 @@ Group MM3
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EventHub | Explore</title>
-    <-- Connect shared stylesheet -->
-        <link rel="stylesheet" href="css/styles.css">
+    <title>EventHub | Explore Events</title>
+
+    <!-- Connect shared stylesheet located inside public/css -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <nav class="navbar">
-        <a href="index.html" class="logo">EventHub</a>
 
-        <div class="nav-links desktop-only">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="explore.html" class="nav-link">Explore Events</a>
-            <a href="host.html" class="nav-links active">Host Event</a>
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
+<!-- Main navigation bar -->
+<nav class="navbar">
+
+    <!-- EventHub logo -->
+    <a href="index.html" class="logo">EventHub</a>
+
+    <!-- Desktop navigation links -->
+    <div class="nav-links desktop-only">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="explore.html" class="nav-link active">Explore Events</a>
+        <a href="host.html" class="nav-link">Host Event</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+    </div>
+
+    <!-- Desktop navigation actions -->
+    <div class="nav-actions desktop-only">
+
+        <!-- Theme toggle -->
+        <button class="theme-toggle-btn" onclick="toggleTheme()">
+            <span id="theme-icon">☀️</span>
+            <span id="theme-text">Day Mode</span>
+        </button>
+
+        <!-- Login -->
+        <a href="login.html" class="login-btn">LogIn</a>
+
+        <!-- Sign Up -->
+        <a href="signup.html" class="action-btn">Sign Up</a>
+
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+            class="mobile-toggle mobile-only"
+            onclick="toggleMobileMenu()">
+        ☰
+    </button>
+
+</nav>
+
+
+<!-- Mobile navigation drawer -->
+<div id="mobile-drawer" class="mobile-drawer mobile-only">
+
+    <a href="index.html" class="nav-link">Home</a>
+
+    <a href="explore.html" class="nav-link active">
+        Explore Events
+    </a>
+
+    <a href="host.html" class="nav-link">
+        Host Event
+    </a>
+
+    <a href="dashboard.html" class="nav-link">
+        Dashboard
+    </a>
+
+    <hr style="background-color: var(--border-color); margin: 0.5rem 0;">
+
+    <!-- Mobile theme toggle -->
+    <button
+            class="theme-toggle-btn"
+            onclick="toggleTheme()">
+        Toggle Theme
+    </button>
+
+    <!-- Mobile login -->
+    <a
+            href="login.html"
+            class="login-btn"
+            style="text-align: center;">
+        LogIn
+    </a>
+
+    <!-- Mobile sign up -->
+    <a href="signup.html" class="action-btn">
+        Sign Up
+    </a>
+
+</div>
+
+
+<!-- Main content -->
+<main class="main-container">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <h1>Explore Events</h1>
+        <p>Browse what's happening across Cape Town — from live music to workshops, markets to matchdays.</p>
+    </div>
+
+    <!-- Explore search + filter controls -->
+    <div class="explore-controls">
+
+        <div class="form-group search-group">
+            <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search events, artists, venues..."
+                    onkeyup="handleSearch(event)">
         </div>
-           
-    <main class="main-container">
-        <div class="page-header">
-            <h1>Explore Events</h1>
-            <p>Browse what's happening across Cape Town — from live music to workshops, markets to matchdays.</p>
+
+        <div class="tab-switch" id="timeframe-switch">
+            <button type="button" class="tab-btn active" data-value="upcoming" onclick="handleTimeframeChange(event)">Upcoming</button>
+            <button type="button" class="tab-btn" data-value="past" onclick="handleTimeframeChange(event)">Past</button>
         </div>
- 
-        <div class="explore-controls">
-            <div class="form-group search-group">
-                <input type="text" id="search-input" placeholder="Search events, artists, venues..." onkeyup="handleSearch(event)">
-            </div>
- 
-            <div class="tab-switch" id="timeframe-switch">
-                <button type="button" class="tab-btn active" data-value="upcoming" onclick="handleTimeframeChange(event)">Upcoming</button>
-                <button type="button" class="tab-btn" data-value="past" onclick="handleTimeframeChange(event)">Past</button>
-            </div>
- 
-            <div class="form-group">
-                <select id="sort-select" onchange="handleSortChange(event)">
-                    <option value="date">Sort: Date</option>
-                    <option value="price">Sort: Price</option>
-                    <option value="popularity">Sort: Popularity</option>
-                </select>
-            </div>
+
+        <div class="form-group">
+            <select id="sort-select" onchange="handleSortChange(event)">
+                <option value="date">Sort: Date</option>
+                <option value="price">Sort: Price</option>
+                <option value="popularity">Sort: Popularity</option>
+            </select>
         </div>
- 
-        <ul class="filter-chips" id="category-chips">
-            <li><button type="button" class="chip active" data-value="all" onclick="handleCategoryChange(event)">All</button></li>
-            <li><button type="button" class="chip" data-value="music" onclick="handleCategoryChange(event)">Music</button></li>
-            <li><button type="button" class="chip" data-value="workshop" onclick="handleCategoryChange(event)">Workshops</button></li>
-            <li><button type="button" class="chip" data-value="sports" onclick="handleCategoryChange(event)">Sports</button></li>
-            <li><button type="button" class="chip" data-value="market" onclick="handleCategoryChange(event)">Markets</button></li>
-            <li><button type="button" class="chip" data-value="arts" onclick="handleCategoryChange(event)">Arts &amp; Theatre</button></li>
-        </ul>
- 
-        <p class="results-meta" id="results-meta"></p>
- 
-        <div class="event-grid" id="event-grid">
-            <!-- Event cards injected by renderEvents() in app.js -->
-        </div>
-    </main>
- 
-    <!-- Connect shared client script -->
-    <script src="js/app.js"></script>
-    <script>
-        const exploreState = {
-            keyword: "",
-            category: "all",
-            timeframe: "upcoming",
-            sortBy: "date",
-        };
-        function handleSearch(event) {
-            exploreState.keyword = event.target.value;
-            renderEvents(exploreState);
+
+    </div>
+
+    <!-- Category filter chips -->
+    <ul class="filter-chips" id="category-chips">
+        <li><button type="button" class="chip active" data-value="all" onclick="handleCategoryChange(event)">All</button></li>
+        <li><button type="button" class="chip" data-value="music" onclick="handleCategoryChange(event)">Music</button></li>
+        <li><button type="button" class="chip" data-value="arts & culture" onclick="handleCategoryChange(event)">Arts &amp; Culture</button></li>
+        <li><button type="button" class="chip" data-value="technology" onclick="handleCategoryChange(event)">Technology</button></li>
+        <li><button type="button" class="chip" data-value="sports" onclick="handleCategoryChange(event)">Sports</button></li>
+        <li><button type="button" class="chip" data-value="markets" onclick="handleCategoryChange(event)">Markets</button></li>
+    </ul>
+
+    <p class="results-meta" id="results-meta"></p>
+
+    <!-- Explore results grid, same card language as the homepage's trending-grid -->
+    <div class="events-grid" id="event-grid">
+        <!-- Event cards injected by renderEvents() below -->
+    </div>
+
+</main>
+
+
+<!-- Connect shared client script -->
+<script src="js/app.js"></script>
+
+<!-- Explore page logic -->
+<script>
+    // Mock dataset standing in for whatever app.js already uses to
+    // populate #trending-grid on the homepage (same card shape, more rows,
+    // plus a timeframe flag so Upcoming/Past has something to switch on).
+    const exploreEvents = [
+        { id: 1, title: "Cape Town Amapiano Night", category: "Music", location: "Cape Town CBD (Western Cape)", datetime: "2026-10-10T20:00:00", price: 150, timeframe: "upcoming" },
+        { id: 2, title: "Cape Town Art & Culture Festival", category: "Arts & Culture", location: "Company Gardens (Western Cape)", datetime: "2026-10-17T10:00:00", price: 80, timeframe: "upcoming" },
+        { id: 3, title: "Tech & Innovation Meetup", category: "Technology", location: "Cape Town (Western Cape)", datetime: "2026-10-24T09:00:00", price: 0, timeframe: "upcoming" },
+        { id: 4, title: "Stormers vs Bulls — URC Derby", category: "Sports", location: "DHL Stadium (Western Cape)", datetime: "2026-10-31T15:00:00", price: 480, timeframe: "upcoming" },
+        { id: 5, title: "Woodstock Design & Craft Market", category: "Markets", location: "The Old Biscuit Mill (Western Cape)", datetime: "2026-10-12T09:00:00", price: 0, timeframe: "upcoming" },
+        { id: 6, title: "Deep House on the Rooftop", category: "Music", location: "Truth Coffee Rooftop (Western Cape)", datetime: "2026-08-02T19:00:00", price: 250, timeframe: "past" },
+        { id: 7, title: "Sea Point Food Truck Festival", category: "Markets", location: "Sea Point Promenade (Western Cape)", datetime: "2026-07-19T11:00:00", price: 0, timeframe: "past" },
+        { id: 8, title: "Fringe Theatre: Midnight Monologues", category: "Arts & Culture", location: "Baxter Theatre (Western Cape)", datetime: "2026-07-05T19:30:00", price: 180, timeframe: "past" },
+    ];
+
+    const exploreState = {
+        keyword: "",
+        category: "all",
+        timeframe: "upcoming",
+        sortBy: "date",
+    };
+
+    const grid = document.getElementById("event-grid");
+    const resultsMeta = document.getElementById("results-meta");
+
+    function formatDateTime(iso) {
+        const dt = new Date(iso);
+        const datePart = dt.toLocaleDateString("en-ZA", { year: "numeric", month: "2-digit", day: "2-digit" });
+        const timePart = dt.toLocaleTimeString("en-ZA", { hour: "2-digit", minute: "2-digit", hour12: false });
+        return `${datePart} at ${timePart}`;
+    }
+
+    // Same card shape as the homepage's trending event cards:
+    // category badge, title, 📅 date row, 📍 location row, price, View Details button.
+    function buildEventCard(e) {
+        return `
+            <div class="event-card">
+                <div class="event-card-image"></div>
+                <div class="event-card-body">
+                    <span class="event-category-badge">${e.category}</span>
+                    <h3 class="event-title">${e.title}</h3>
+                    <p class="event-meta">📅 ${formatDateTime(e.datetime)}</p>
+                    <p class="event-meta">📍 ${e.location}</p>
+                    <p class="event-price">${e.price === 0 ? "FREE" : "R" + e.price}</p>
+                    <a href="details.html?id=${e.id}" class="action-btn" style="width: 100%; display: block; text-align: center;">View Details</a>
+                </div>
+            </div>`;
+    }
+
+    function renderEvents(state) {
+        let results = exploreEvents.filter(e => e.timeframe === state.timeframe);
+
+        if (state.category !== "all") {
+            results = results.filter(e => e.category.toLowerCase() === state.category);
         }
- 
-        function handleTimeframeChange(event) {
-            document.querySelectorAll("#timeframe-switch .tab-btn").forEach(btn => btn.classList.remove("active"));
-            event.target.classList.add("active");
-            exploreState.timeframe = event.target.dataset.value;
-            renderEvents(exploreState);
+        if (state.keyword.trim()) {
+            const k = state.keyword.toLowerCase();
+            results = results.filter(e =>
+                e.title.toLowerCase().includes(k) || e.location.toLowerCase().includes(k));
         }
- 
-        function handleCategoryChange(event) {
-            document.querySelectorAll("#category-chips .chip").forEach(chip => chip.classList.remove("active"));
-            event.target.classList.add("active");
-            exploreState.category = event.target.dataset.value;
-            renderEvents(exploreState);
-        }
- 
-        function handleSortChange(event) {
-            exploreState.sortBy = event.target.value;
-            renderEvents(exploreState);
-        }
-        document.addEventListener("DOMContentLoaded", () => renderEvents(exploreState));
-    </script>
+
+        results.sort((a, b) => {
+            if (state.sortBy === "price") return a.price - b.price;
+            if (state.sortBy === "popularity") return b.id - a.id;
+            return new Date(a.datetime) - new Date(b.datetime);
+        });
+
+        resultsMeta.textContent = `${results.length} event${results.length === 1 ? "" : "s"} found`;
+
+        grid.innerHTML = results.length
+            ? results.map(buildEventCard).join("")
+            : `<p>No events match those filters. Try a different category or clear your search.</p>`;
+    }
+
+    function handleSearch(event) {
+        exploreState.keyword = event.target.value;
+        renderEvents(exploreState);
+    }
+
+    function handleTimeframeChange(event) {
+        document.querySelectorAll("#timeframe-switch .tab-btn").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+        exploreState.timeframe = event.target.dataset.value;
+        renderEvents(exploreState);
+    }
+
+    function handleCategoryChange(event) {
+        document.querySelectorAll("#category-chips .chip").forEach(chip => chip.classList.remove("active"));
+        event.target.classList.add("active");
+        exploreState.category = event.target.dataset.value;
+        renderEvents(exploreState);
+    }
+
+    function handleSortChange(event) {
+        exploreState.sortBy = event.target.value;
+        renderEvents(exploreState);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => renderEvents(exploreState));
+</script>
+
 </body>
- 
+
 </html>
