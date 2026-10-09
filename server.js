@@ -2,7 +2,7 @@
 230600204
 Class 3.I 
 Group MM3
-Last Date and Time worked on: Thursday 10 September 2026 10:19
+Last Date and Time worked on: Friday 09 October 2026 16:22
 */
 
 //Load environment variables from .env file
@@ -16,9 +16,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//Enable Cross-Origin Resource Sharing and JSON Body Parsing
+//Enable Cross-Origin Resource Sharing, JSON Body Parsing, and HTML form Parsing
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended:true})); // <-- CRITICAL: Allows HTML form submissions to be read
 
 //Serve all static web pages from the 'public' directory 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -33,6 +34,17 @@ const dbPool = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10
 });
+
+//TEST DATABASE CONNECTION ON BOOT
+(async () => {
+    try {
+        const connection = await dbPool.getConnection();
+        console.log('✅ Successfully connected to the MYSQL database!');
+        connection.release();
+    } catch (err) {
+        console.error('❌ Failed to connect to MYSQL database!', err.message);
+    }
+})();
 
 //GET Route: Retrieve events with optional filters(category, province, serach term, evnt ID)
 app.get('/api/events', async (req, res) => {
@@ -90,7 +102,6 @@ app.get('/api/events', async (req, res) => {
     }
 });
 
-//POST Route: Save a new event into MySQL using transactional queries
 //POST Route: Save a new event into MySQL using transactional queries
 app.post('/api/events', async (req, res) => {
     const connection = await dbPool.getConnection();
@@ -150,6 +161,7 @@ app.post('/api/auth/signup', async (req, res) => {
         );
         res.status(201).json({ success: true, message: 'User registered successfully!' });
     } catch (error) {
+        console.error('Signup error:', error);
         res.status(400).json({ success: false, message: 'Email already exists or invalid data.' });
     }
 });
@@ -169,6 +181,7 @@ app.post('/api/auth/login', async (req, res) => {
             res.status(401).json({ success: false, message: 'Invalid credentials.' });
         }
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ success: false, message: 'Authentication process failed.' });
     }
 });

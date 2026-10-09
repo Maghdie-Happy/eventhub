@@ -2,7 +2,7 @@
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Thursday 10 September 2026 11:29
+Last Date and Time worked on: Friday 09 October 2026 17:46
 */
 
 <!DOCTYPE html>
@@ -12,7 +12,7 @@ Last Date and Time worked on: Thursday 10 September 2026 11:29
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventHub | Create Account</title>
-    <-- Connect shared stylesheet -->
+    <!-- Connect shared stylesheet -->
         <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -23,7 +23,7 @@ Last Date and Time worked on: Thursday 10 September 2026 11:29
     <main class="main-container">
         <div class="form-card auth-card">
             <h2>Create an Account</h2>
-            <form onsubmit="handleSignUp(event)">
+            <form id="signup-form">
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" id="signup-name" required placeholder="e.g. Jane Doe">
@@ -42,7 +42,35 @@ Last Date and Time worked on: Thursday 10 September 2026 11:29
         </div>
     </main>
     <!-- Connect shared client script -->
-    <script src="js/app.js"></script>
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const fullName = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            try {
+                const response = await fetch('api/auth/signup', {
+                   method : 'POST',
+                    headers : {'Content-Type':'application/json'},
+                    body : JSON.stringify({fullName, email, password})
+                });
+
+                const data = await response.json();
+
+                if (data.success){
+                    alert('Account created successfully!');
+                    window.location.href = 'login.html';
+                }else {
+                    alert('Signup failed: ' + data.message);
+                }
+            } catch (err) {
+                console.error('Error submitting form:', err);
+                alert('Server error. Check your connection.');
+            }
+        });
+    </script>
 </body>
 
 </html>
