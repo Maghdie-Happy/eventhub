@@ -1,0 +1,174 @@
+<!--
+Sinethemba Nyimbinya
+2200858570
+Group MM3
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventHub | Admin Dashboard</title>
+
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<!-- Main navigation bar -->
+<nav class="navbar">
+
+    <!-- EventHub logo -->
+    <a href="index.html" class="logo">EventHub</a>
+
+    <!-- Desktop navigation links -->
+    <div class="nav-links desktop-only">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="explore.html" class="nav-link">Explore Events</a>
+        <a href="host.html" class="nav-link">Host Event</a>
+        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+    </div>
+
+    <!-- Desktop navigation actions -->
+    <div class="nav-actions desktop-only">
+
+        <!-- Theme toggle -->
+        <button class="theme-toggle-btn" onclick="toggleTheme()">
+            <span id="theme-icon">☀️</span>
+            <span id="theme-text">Day Mode</span>
+        </button>
+
+        <!-- Only admins reach this page, so show Logout instead of Login/Sign Up -->
+        <button class="login-btn" onclick="logout()">Logout</button>
+
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+            class="mobile-toggle mobile-only"
+            onclick="toggleMobileMenu()">
+        ☰
+    </button>
+
+</nav>
+
+
+<!-- Mobile navigation drawer -->
+<div id="mobile-drawer" class="mobile-drawer mobile-only">
+
+    <a href="index.html" class="nav-link">Home</a>
+
+    <a href="explore.html" class="nav-link">
+        Explore Events
+    </a>
+
+    <a href="host.html" class="nav-link">
+        Host Event
+    </a>
+
+    <a href="dashboard.html" class="nav-link">
+        Dashboard
+    </a>
+
+    <hr style="background-color: var(--border-color); margin: 0.5rem 0;">
+
+    <!-- Mobile theme toggle -->
+    <button
+            class="theme-toggle-btn"
+            onclick="toggleTheme()">
+        Toggle Theme
+    </button>
+
+    <!-- Mobile logout -->
+    <button class="login-btn" onclick="logout()">Logout</button>
+
+</div>
+
+
+<!-- Main content -->
+<main class="main-container">
+
+    <!-- Page header -->
+    <div class="page-header">
+        <h1>Admin Dashboard</h1>
+        <p>A platform-wide overview of every event currently listed on EventHub.</p>
+    </div>
+
+    <!-- Summary cards, filled in by renderAdminStats() in app.js -->
+    <div class="dashboard-grid" style="margin-top: 1.5rem;">
+        <div class="dash-card">
+            <p style="color: var(--text-secondary);">Total Events</p>
+            <p class="dash-num" id="stat-total">-</p>
+        </div>
+        <div class="dash-card">
+            <p style="color: var(--text-secondary);">Featured Events</p>
+            <p class="dash-num" id="stat-featured">-</p>
+        </div>
+        <div class="dash-card">
+            <p style="color: var(--text-secondary);">Free Events</p>
+            <p class="dash-num" id="stat-free">-</p>
+        </div>
+        <div class="dash-card">
+            <p style="color: var(--text-secondary);">Average Ticket Price</p>
+            <p class="dash-num" id="stat-avg-price">-</p>
+        </div>
+    </div>
+
+    <!-- Search and category filter -->
+    <div class="admin-toolbar">
+        <input type="text" id="admin-search" class="admin-input"
+               placeholder="Search by title, organizer or location...">
+        <select id="admin-category" class="admin-input">
+            <option value="">All Categories</option>
+            <option value="Technology">Technology</option>
+            <option value="Music">Music</option>
+            <option value="Food">Food</option>
+            <option value="Sports">Sports</option>
+        </select>
+    </div>
+
+    <!-- Results count, filled in by app.js -->
+    <p class="results-meta" id="admin-results-meta" style="margin: 1rem 0;"></p>
+
+    <!-- All events table -->
+    <div class="dash-card" style="overflow-x: auto; padding: 0;">
+
+        <table class="admin-table" id="admin-events-table">
+
+            <thead>
+            <tr>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Organizer</th>
+                <th>Location</th>
+                <th>Province</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Price</th>
+                <th>Featured</th>
+            </tr>
+            </thead>
+
+            <!--
+                Table rows are dynamically inserted here
+                by fetchAdminEvents() in public/js/app.js.
+            -->
+            <tbody id="admin-events-body">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+
+<!-- Connect shared JavaScript -->
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
