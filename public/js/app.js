@@ -1,4 +1,4 @@
-/*Maghdie Petersen
+/* Maghdie Petersen
 230600204
 Class 3.I
 Group MM3
@@ -6,8 +6,6 @@ Last Date and Time worked on: Thursday 10 September 2026 10:10
 Sinethemba Nyimbinya
 220085870
 Added  Function escapeHTML() , function fetchAdminEvents(),function renderAdminStats(events)
-
-
 */
 
 //LocalStorage identifier constant for keeping theme preferences saved across refreshes
@@ -1506,4 +1504,18 @@ function renderAdminTable(events) {
             <td>${Number(event.featured) === 1 ? 'Yes' : 'No'}</td>
         </tr>
     `).join('');
+}
+
+//Function to toggle password field visibility
+function togglePasswordVisibility(inputId, btn) {
+    const passwordInput = document.getElementById(inputId);
+    if (passwordInput){
+        if (passwordInput.type === 'password'){
+            passwordInput.type = 'text';
+            btn.textContent = 'Hide';
+        }else{
+            passwordInput.type = 'password';
+            btn.textContent = 'Show';
+        }
+    }
 }

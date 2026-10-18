@@ -2,7 +2,7 @@
 230600204
 Class 3.I 
 Group MM3
-Last Date and Time worked on: Friday 09 October 2026 16:22
+Last Date and Time worked on: Sunday 18 October 2026 21:28
 */
 
 //Load environment variables from .env file
@@ -25,6 +25,7 @@ app.use(express.urlencoded({extended:true})); // <-- CRITICAL: Allows HTML form 
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Connect to local MySQL database using port 3306 from environment variables
+//Connect to database using environment variables or fallback values
 const dbPool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
     port: process.env.DB_PORT || 3306,
@@ -32,7 +33,8 @@ const dbPool = mysql.createPool({
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'eventhub_db',
     waitForConnections: true,
-    connectionLimit: 10
+    connectionLimit: 10,
+    ssl: process.env.DB_HOST ? { rejectUnauthorized : false} : false // Enable SSL for cloud DBs
 });
 
 //TEST DATABASE CONNECTION ON BOOT
@@ -186,5 +188,5 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-//Start Express server
-app.listen(PORT, () => console.log(`EventHub server running at http://localhost:${PORT} `));
+//Start Express server listening on 0.0.0.0 for cloud hosts
+app.listen(PORT, '0.0.0.0',() => console.log(`EventHub server running on port ${PORT}`));

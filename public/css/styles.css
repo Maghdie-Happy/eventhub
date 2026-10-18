@@ -261,6 +261,33 @@ body {
     gap: 1rem;
 }
 
+/*Password Toggle Styling*/
+.password-wrapper{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input{
+    width: 100%;
+    padding-right: 60px;
+}
+
+.toggle-password-btn {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: var(--accent-teal);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.toggle-password-btn:hover {
+    text-decoration: underline;
+}
+
 .auth-switch {
     text-align: center;
     margin-top: 1rem;
@@ -536,5 +563,5 @@ body {
         grid-template-columns: 1fr;
         gap: 0;
     }
-
 }
+

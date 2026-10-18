@@ -1,9 +1,9 @@
-/*Maghdie Petersen
+<!-- Maghdie Petersen
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Friday 09 October 2026 17:46
-*/
+Last Date and Time worked on: Sunday 18 October 2026 21:08
+-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +34,12 @@ Last Date and Time worked on: Friday 09 October 2026 17:46
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="signup-password" required placeholder="*********">
+                    <div class="password-wrapper">
+                        <input type="password" id="signup-password" required placeholder="*********">
+                        <button type="button" class="toggle-password-btn" onclick="togglePasswordVisibility('signup-password', this)">Show</button>
+                    </div>
                 </div>
-                <button type="submit" class="action-btn" style="width: 100%;">Create Accont</button>
+                <button type="submit" class="action-btn" style="width: 100%;">Create Account</button>
                 <p class="auth-switch">Already have an account? <a href="login.html">Log In</a></p>
             </form>
         </div>

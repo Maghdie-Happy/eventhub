@@ -2,7 +2,7 @@
 230600204
 Class 3.I 
 Group MM3
-Last Date and Time worked on: Thursday 10 September 2026 10:17
+Last Date and Time worked on: Sunday 18 October 2026 21:08
 */
 
 /*Intialize main database instance*/
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS events(event_id INT AUTO_INCREMENT PRIMARY KEY,
 organizer_id INT NOT NULL, location_id INT NOT NULL, schedule_id INT NOT NULL,
 title VARCHAR(255) NOT NULL, description TEXT NOT NULL,
 ticket_price DECIMAL(10,2) DEFAULT 0.00, is_featured BOOLEAN DEFAULT FALSE,
-category ENUM('Technology','Music','Food','Sports') NOT NULL,
+category ENUM('Technology','Music','Food','Sports','Art & Culture','Business','Networking','Education','Health & Fitness') NOT NULL,
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (organizer_id) REFERENCES users(user_id) ON DELETE CASCADE,
 FOREIGN KEY (location_id) REFERENCES locations(location_id) ON DELETE CASCADE,
