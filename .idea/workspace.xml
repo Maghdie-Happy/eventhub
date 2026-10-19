@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="updated app so price works">
+    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="updated app again so price works">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +96,7 @@
       <workItem from="1791572827289" duration="51000" />
       <workItem from="1791573003036" duration="754000" />
       <workItem from="1792342435714" duration="10061000" />
-      <workItem from="1792398432479" duration="18699000" />
+      <workItem from="1792398432479" duration="19368000" />
     </task>
     <task id="LOCAL-00001" summary="Signup, env, server all updated, also the database works now">
       <option name="closed" value="true" />
@@ -145,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792421903188</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="updated app again so price works">
+      <option name="closed" value="true" />
+      <created>1792422290082</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1792422290082</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +168,7 @@
     <MESSAGE value="updated dashboard page and css so that explore page looks neater and better" />
     <MESSAGE value="updated app so that images appear/generate on hompage aswell as it being an option on host page page and allso updates css  to accomadate it" />
     <MESSAGE value="updated app so price works" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated app so price works" />
+    <MESSAGE value="updated app again so price works" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated app again so price works" />
   </component>
 </project>

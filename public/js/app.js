@@ -75,7 +75,7 @@ const categoryImages = {
     'Music' : 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
     'Food' : 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
     'Sports' : 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80',
-    'Art & Culture' : 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?auto=format&fit=crop&w=800&q=80',
+    'Art & Culture' : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80',
     'Business' : 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80',
     'Networking' : 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80',
     'Education' : 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
@@ -258,7 +258,7 @@ function renderGrid(events, containerId) {
 
         const numericPrice = Number(event.price || 0);
         const displayPrice = numericPrice > 0 ? `R${numericPrice.toFixed(2)}` : 'FREE';
-        const imageUrl = event.image_url || categoryImages[event.category] || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80';
+        const imageUrl = event.image_url || categoryImages[event.category] || categoryImages[event.category?.trim()] ||'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80';
 
         return `
         <div class="event-card">
