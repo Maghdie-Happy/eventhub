@@ -2,7 +2,7 @@
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Thursday 10 September 2026 10:23
+Last Date and Time worked on: Monday 19 October 2026 11:17
 */
 
 /*Variables for switching between Light and Dark Mode*/
@@ -564,4 +564,111 @@ body {
         gap: 0;
     }
 }
+
+/*Explore page controls layout*/
+.explore-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0 1rem 0;
+}
+
+.explore-controls .search-group {
+    flex: 1;
+    min-width: 280px;
+    margin-bottom: 0;
+}
+
+.explore-controls .search-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+/*Timeframe Segmented Switch (Upcoming / Past)*/
+.tab-switch {
+    display: inline-flex;
+    background: var(--bg-secondary);
+    padding: 0.25rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.tab-switch .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 0.55rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tab-switch .tab-btn.active {
+    background: var(--card-bg);
+    color: var(--accent-teal);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/*Sort dropdown*/
+.explore-controls select {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    color: var(--text-primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/*Category filter chips (Pill buttons)*/
+.filter-chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1rem 0 1.5rem 0;
+    padding: 0;
+}
+
+.filter-chips .chip {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.45rem 1.1rem;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-chips .chip.active,
+.filter-chips .chip:hover {
+    background: var(--accent-teal);
+    color: #ffffff;
+    border-color: var(--accent-teal);
+}
+
+.results-meta {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+
+
+
+
+
+
+
+
+
 
