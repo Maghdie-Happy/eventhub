@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="updated explore page and css so that explore page looks neater and better">
+    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="updated dashboard page and css so that explore page looks neater and better">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/host.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/host.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +98,7 @@
       <workItem from="1791572827289" duration="51000" />
       <workItem from="1791573003036" duration="754000" />
       <workItem from="1792342435714" duration="10061000" />
-      <workItem from="1792398432479" duration="7704000" />
+      <workItem from="1792398432479" duration="17720000" />
     </task>
     <task id="LOCAL-00001" summary="Signup, env, server all updated, also the database works now">
       <option name="closed" value="true" />
@@ -124,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792402088410</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="updated dashboard page and css so that explore page looks neater and better">
+      <option name="closed" value="true" />
+      <created>1792408874098</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1792408874098</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,6 +143,7 @@
     <MESSAGE value="Signup, env, server all updated, also the database works now" />
     <MESSAGE value="updated app.js, html files: host,login, signup, database, server, style.css, all to have better things and comfortibility" />
     <MESSAGE value="updated explore page and css so that explore page looks neater and better" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated explore page and css so that explore page looks neater and better" />
+    <MESSAGE value="updated dashboard page and css so that explore page looks neater and better" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated dashboard page and css so that explore page looks neater and better" />
   </component>
 </project>

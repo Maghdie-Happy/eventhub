@@ -2,7 +2,7 @@
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Monday 19 October 2026 13:20
+Last Date and Time worked on: Monday 19 October 2026 16:48
 */
 
 /*Variables for switching between Light and Dark Mode*/
@@ -15,6 +15,7 @@ Last Date and Time worked on: Monday 19 October 2026 13:20
     --accent-teal: #0d9488;
     --border-color: #334155;
     --image-placeholder: #25334d;
+    --input-bg: #172033;
 }
 
 body.light-mode {
@@ -26,6 +27,7 @@ body.light-mode {
     --accent-teal: #0d9488;
     --border-color: #e2e8f0;
     --image-placeholder: #cbd5e1;
+    --input-bg: #ffffff;
 }
 
 /*Basic page reset styles*/
@@ -738,8 +740,31 @@ select.admin-input {
     font-weight: 600;
 }
 
+/*Event card Image generator alignment and set*/
+.event-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 
+.event-card-image {
+    width: 100%;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid var(--border-color);
+}
 
+.event-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
 
 
 

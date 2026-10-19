@@ -2,7 +2,8 @@
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Thursday 10 September 2026 10:10
+Last Date and Time worked on: Monday 19 October 2026 16:42
+
 Sinethemba Nyimbinya
 220085870
 Added  Function escapeHTML() , function fetchAdminEvents(),function renderAdminStats(events)
@@ -68,6 +69,18 @@ const DEFAULT_EVENTS = [
     }
 ];
 
+//High-resolution category stock pictures for preview covers
+const categoryImages = {
+    'Technology' : 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    'Music' : 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80',
+    'Food' : 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+    'Sports' : 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=800&q=80',
+    'Art & Culture' : 'https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?auto=format&fit=crop&w=800&q=80',
+    'Business' : 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80',
+    'Networking' : 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80',
+    'Education' : 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80',
+    'Health & Fitness' : 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80'
+};
 
 //Execute page-specific functions once HTML content loads fully
 document.addEventListener('DOMContentLoaded', () => {
@@ -220,8 +233,7 @@ async function fetchEventsWithFilters() {
 //Dynamically render HTML event card structures into target container
 function renderGrid(events, containerId) {
 
-    const container =
-        document.getElementById(containerId);
+    const container = document.getElementById(containerId);
 
     if (!container) return;
 
@@ -240,40 +252,47 @@ function renderGrid(events, containerId) {
         return;
     }
 
-    container.innerHTML = events.map(event => `
+    container.innerHTML = events.map(event => {
 
+//Determine cover photo bassed on category or default fallback
+        const imageUrl = event.image_url || categoryImages[event.category] || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80';
+
+        return `
         <div class="event-card">
 
-            <div class="image-placeholder">
-                <span>${event.title}</span>
+<!-- Card cover image header -->
+            <div class="image-placeholder" style="background-image: url('${imageUrl}'); 
+            background-size: cover; background-position: center; height: 180px; 
+                border-bottom: 1px solid var(--border-color);
+               ">
             </div>
 
             <div class="card-content">
 
                 <span class="badge">
-                    ${event.category}
+                    ${escapeHTML(event.category)}
                 </span>
 
                 <h4>
-                    ${event.title}
+                    ${escapeHTML(event.title)}
                 </h4>
 
                 <p class="event-date">
-                    🗓️ ${event.date ? event.date.split('T')[0] : ''}
-                    at ${event.time}
+                    🗓️ ${event.date ? escapeHTML(String(event.date.split('T')[0])) : ''}
+                    at ${escapeHTML(event.time || '')}
                 </p>
 
                 <p class="event-loc">
-                    📍 ${event.loc} (${event.scope})
+                    📍 ${escapeHTML(event.loc || '')} (${escapeHTML(event.scope || '')})
                 </p>
 
                 <p style="
                     font-weight: bold;
                     margin-top: 0.25rem;
                 ">
-                    ${event.price > 0
-        ? `R${event.price}`
-        : 'FREE'}
+                    ${Number(event.price || 0) > 0
+            ? `R\${Number(event.price).toFixed(2)}`
+            : 'FREE'}
                 </p>
 
                 <!-- Connects card to details view -->
@@ -288,8 +307,10 @@ function renderGrid(events, containerId) {
 
         </div>
 
-    `).join('');
+    `;
+    }).join('');
 }
+
 
 
 //Read event ID from query parameters and render dynamic details
