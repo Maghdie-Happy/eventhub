@@ -2,7 +2,7 @@
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Monday 19 October 2026 16:42
+Last Date and Time worked on: Monday 19 October 2026 16:58
 
 Sinethemba Nyimbinya
 220085870
@@ -291,7 +291,7 @@ function renderGrid(events, containerId) {
                     margin-top: 0.25rem;
                 ">
                     ${Number(event.price || 0) > 0
-            ? `R\${Number(event.price).toFixed(2)}`
+            ? `R${Number(event.price).toFixed(2)}`
             : 'FREE'}
                 </p>
 
