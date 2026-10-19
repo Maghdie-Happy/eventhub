@@ -255,6 +255,9 @@ function renderGrid(events, containerId) {
     container.innerHTML = events.map(event => {
 
 //Determine cover photo bassed on category or default fallback
+
+        const numericPrice = Number(event.price || 0);
+        const displayPrice = numericPrice > 0 ? `R${numericPrice.toFixed(2)}` : 'FREE';
         const imageUrl = event.image_url || categoryImages[event.category] || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=800&q=80';
 
         return `
@@ -290,9 +293,7 @@ function renderGrid(events, containerId) {
                     font-weight: bold;
                     margin-top: 0.25rem;
                 ">
-                    ${Number(event.price || 0) > 0
-            ? `R${Number(event.price).toFixed(2)}`
-            : 'FREE'}
+                ${displayPrice}
                 </p>
 
                 <!-- Connects card to details view -->
