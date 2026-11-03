@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="updated app again 2 so all pics works">
+    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="Fixed show and hide password aswell mas other small errors on sign up page.">
       <change beforePath="$PROJECT_DIR$/public/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/signup.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +98,7 @@
       <workItem from="1792398432479" duration="19684000" />
       <workItem from="1793029055253" duration="30000" />
       <workItem from="1793029119947" duration="36000" />
-      <workItem from="1793701712084" duration="1418000" />
+      <workItem from="1793701712084" duration="1735000" />
     </task>
     <task id="LOCAL-00001" summary="Signup, env, server all updated, also the database works now">
       <option name="closed" value="true" />
@@ -172,7 +172,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793702207774</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixed show and hide password aswell mas other small errors on sign up page.">
+      <option name="closed" value="true" />
+      <created>1793706140544</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1793706140544</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +197,7 @@
     <MESSAGE value="updated app again so price works" />
     <MESSAGE value="updated app again so all pics works" />
     <MESSAGE value="updated app again 2 so all pics works" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated app again 2 so all pics works" />
+    <MESSAGE value="Fixed show and hide password aswell mas other small errors on sign up page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed show and hide password aswell mas other small errors on sign up page." />
   </component>
 </project>
