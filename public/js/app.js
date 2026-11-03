@@ -2,7 +2,7 @@
 230600204
 Class 3.I
 Group MM3
-Last Date and Time worked on: Monday 19 October 2026 16:58
+Last Date and Time worked on: Tuesday 03 November 2026 15:34
 
 Sinethemba Nyimbinya
 220085870
@@ -1330,6 +1330,9 @@ async function handlePostEvent(e) {
 async function handleLogin(e) {
 
     e.preventDefault();
+
+    //Store login session flag
+    localStorage.setItem('eventhub_logged_in', 'true');
 
     alert(
         'Logged In Successfully!'

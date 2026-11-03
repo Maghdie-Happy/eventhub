@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="Fixed categories aswell as other small errors on dashboard page.">
+    <list default="true" id="8f1b9c86-e039-4dc7-a5e0-cee5bdcd3bd9" name="Changes" comment="Fixed navbar login,signup, logout button appearances aswell as when they are shown and when they are hidden.">
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +98,7 @@
       <workItem from="1792398432479" duration="19684000" />
       <workItem from="1793029055253" duration="30000" />
       <workItem from="1793029119947" duration="36000" />
-      <workItem from="1793701712084" duration="5582000" />
+      <workItem from="1793701712084" duration="5984000" />
     </task>
     <task id="LOCAL-00001" summary="Signup, env, server all updated, also the database works now">
       <option name="closed" value="true" />
@@ -196,7 +196,15 @@
       <option name="project" value="LOCAL" />
       <updated>1793707084456</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed navbar login,signup, logout button appearances aswell as when they are shown and when they are hidden.">
+      <option name="closed" value="true" />
+      <created>1793712422493</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1793712422493</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +223,7 @@
     <MESSAGE value="updated app again 2 so all pics works" />
     <MESSAGE value="Fixed show and hide password aswell mas other small errors on sign up page." />
     <MESSAGE value="Fixed categories aswell as other small errors on dashboard page." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed categories aswell as other small errors on dashboard page." />
+    <MESSAGE value="Fixed navbar login,signup, logout button appearances aswell as when they are shown and when they are hidden." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed navbar login,signup, logout button appearances aswell as when they are shown and when they are hidden." />
   </component>
 </project>
