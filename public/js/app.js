@@ -1541,3 +1541,22 @@ function togglePasswordVisibility(inputId, btn) {
         }
     }
 }
+
+//Automatically update auth buttons in the navbar on every page
+document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('eventhub_logged_in') === 'true';
+
+    //Find auth buttons across navbars and replace them if logged in
+    document.querySelectorAll('.nav-actions, .mobile-drawer').forEach(container => {
+        if (isLoggedIn && !container.innerHTML.includes('Logout')){
+            container.innerHTML += `<button class="login-btn" onclick="logout()">Logout</button>`;
+            //Remove login/signup links if present
+            container.querySelectorAll('a[href*="login.html"], a[href*="signup.html"]').forEach(el => el.remove());
+        }
+    });
+});
+
+function logout() {
+    localStorage.removeItem('eventhub_logged_in');
+    window.location.href = 'index.html';
+}
